@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لَسوسي 😞🩷</title>
+    <style>
+        body {
+            background-color: #ffb3d9;
+            background-image: linear-gradient(135deg, #ffcce6 25%, transparent 25%), 
+                              linear-gradient(225deg, #ffcce6 25%, transparent 25%), 
+                              linear-gradient(45deg, #ffcce6 25%, transparent 25%), 
+                              linear-gradient(315deg, #ffcce6 25%, #ffb3d9 25%);
+            background-position: 40px 0, 40px 0, 0 0, 0 0;
+            background-size: 80px 80px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .player-header {
+            background: rgba(255, 255, 255, 0.95);
+            border: 4px solid #ff3399;
+            border-radius: 50px;
+            padding: 15px 30px;
+            width: 90%;
+            max-width: 800px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 8px 16px rgba(255, 51, 153, 0.3);
+            margin-bottom: 30px;
+        }
+
+        .player-info {
+            font-size: 16px;
+            font-weight: bold;
+            color: #ff3399;
+        }
+
+        .progress-bar {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 50%;
+            height: 12px;
+            border-radius: 10px;
+            background: #ffe6f2;
+            outline: none;
+            border: 2px solid #ff3399;
+        }
+
+        .progress-bar::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #ff3399;
+            cursor: pointer;
+            border: 2px solid #fff;
+        }
+
+        .btn-play {
+            background: #ff3399;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .btn-play:hover {
+            background: #e60073;
+            transform: scale(1.05);
+        }
+
+        .songs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            width: 90%;
+            max-width: 800px;
+        }
+
+        .song-card {
+            background: white;
+            border: 4px solid #ff3399;
+            border-radius: 20px;
+            overflow: hidden;
+            aspect-ratio: 1 / 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .song-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 51, 153, 0.4);
+            background: #fff0f5;
+        }
+
+        .singer-img {
+            width: 90%;
+            height: 65%;
+            border-radius: 12px;
+            object-fit: cover;
+            border: 2px solid #ffb3d9;
+            background-color: #ffe6f2;
+        }
+
+        .song-name {
+            font-size: 14px;
+            font-weight: bold;
+            color: #ff3399;
+            text-align: center;
+            margin-top: 5px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(105vh); }
+        }
+        .heart {
+            position: fixed;
+            top: -20px;
+            z-index: -1;
+            animation: fall linear forwards;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="player-header">
+        <button class="btn-play" onclick="togglePlay()">إيقاف / تشغيل 🎀</button>
+        <input type="range" class="progress-bar" id="progress" value="0" max="100" onchange="setAudioProgress()">
+        <div class="player-info" id="current-track">اختر أغنية يا سوسي 🌸</div>
+    </div>
+
+    <audio id="main-audio" src="" ontimeupdate="updateProgress()"></audio>
+
+    <div class="songs-grid">
+
+        <div class="song-card" onclick="playSong(' skylar grey ', 'songs/2.mp3')">
+            <img src="images/2.jpg" alt="skylar grey" class="singer-img">
+            <div class="song-name">words</div>
+        </div>
+
+        <div class="song-card" onclick="playSong('هيفاء وهبي', 'songs/3.mp3')">
+            <img src="images/3.jpg" alt="هيفاء وهبة" class="singer-img">
+            <div class="song-name">بدنا نروء</div>
+        </div>
+
+        <div class="song-card" onclick="playSong('K3NT4', 'songs/4.mp3')">
+            <img src="images/4.jpg" alt="K3NT4" class="singer-img">
+            <div class="song-name">i can't let you go</div>
+        </div>
+
+        <div class="song-card" onclick="playSong('southiyd', 'songs/5.mp3')">
+            <img src="images/5.jpg" alt="southiyd" class="singer-img">
+            <div class="song-name">my dear</div>
+        </div>
+
+        <div class="song-card" onclick="playSong('الأغنية السابعة', 'songs/7.mp3')">
+            <img src="images/7.jpg" alt="Dorian" class="singer-img">
+            <div class="song-name">Death Lungs</div>
+        </div>
+
+        <div class="song-card" onclick="playSong('TNV', 'songs/8.mp3')">
+            <img src="images/8.jpg" alt="TNV" class="singer-img">
+            <div class="song-name">1%</div>
+        </div>
+
+        <div class="song-card" onclick="playSong('overtonlght', 'songs/9.mp3')">
+            <img src="images/9.jpg" alt="overtonlght" class="singer-img">
+            <div class="song-name">mirrors demo</div>
+        </div>
+
+        <div class="song-card" onclick="playSong('PinkPantheress', 'songs/12.mp3')">
+            <img src="images/12.jpg" alt="PinkPantheress" class="singer-img">
+            <div class="song-name">Pain</div>
+        </div>
+
+    </div>
+
+    <script>
+        const audio = document.getElementById('main-audio');
+        const progress = document.getElementById('progress');
+        const trackTitle = document.getElementById('current-track');
+
+        // تشغيل الأغنية المحددة وتحديث الشريط العلوي بالاسم
+        function playSong(name, audioUrl) {
+            audio.src = audioUrl;
+            trackTitle.innerText = "يعزف الآن: " + name;
+            audio.play();
+        }
+
+        function togglePlay() {
+            if (!audio.src) return;
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+        }
+
+        function updateProgress() {
+            if (audio.duration) {
+                const value = (audio.currentTime / audio.duration) * 100;
+                progress.value = value;
+            }
+        }
+
+        function setAudioProgress() {
+            if (audio.duration) {
+                audio.currentTime = (progress.value / 100) * audio.duration;
+            }
+        }
+
+        // تساقط الورد اللطيف بالخلفية
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '🌸';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            heart.style.fontSize = Math.random() * 10 + 15 + 'px';
+            heart.style.opacity = Math.random();
+            
+            document.body.appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 5000);
+        }
+        setInterval(createHeart, 400);
+    </script>
+</body>
+</html>
